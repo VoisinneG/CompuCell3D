@@ -37,13 +37,11 @@ void MainWindow::on_actionOpenSimulation_triggered()
             if(isOpenSuccess)
             {
                 // Get the model XML tree
-                requestHandler.getModelXMLObject();
+                //requestHandler.getModelXMLObject();
 
                 // Populate the model editor tree view
                 //this->ui->tree
 
-                QTreeView t;
-                t.setModel();
             }
         }
         else
