@@ -4,6 +4,8 @@
 #include<QString>
 #include<QMap>
 #include<resourcetype.h>
+#include <QVersionNumber>
+#include <QFile>
 
 class ModelResouceData
 {
@@ -13,6 +15,7 @@ private:
     QString modelXMLFilePath;
     QString modelPythonFilePath;
     QString modelSettingFilePath;
+    QVersionNumber versionNumber;
 
     QMap<QString, ResourceType> modelResourceFilePathToTypeMap;
 
@@ -32,6 +35,11 @@ public:
 
     QMap<QString, ResourceType> getModelResourceFilePathToTypeMap() const;
     void setModelResourceFilePathToTypeMap(const QMap<QString, ResourceType> &value);
+
+    QVersionNumber getVersionNumber() const;
+    void setVersionNumber(const QString value);
+
+    void addResource(QString resourceFilePath, QString resourceType);
 };
 
 #endif // MODELRESOUCEDATA_H
