@@ -6,6 +6,8 @@
 
 QT       -= gui
 
+QT       += xml
+
 TARGET = RequestHandler
 TEMPLATE = lib
 
