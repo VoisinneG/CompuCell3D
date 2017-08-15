@@ -3,6 +3,9 @@
 
 #include "io_global.h"
 #include <modelresoucedata.h>
+#include <QDomDocument>
+#include <QFileInfo>
+#include <QDir>
 
 class IOSHARED_EXPORT CC3DReader
 {
