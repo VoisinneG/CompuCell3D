@@ -6,12 +6,14 @@
 #include <QFileInfo>
 #include <cc3dreader.h>
 
-class REQUESTHANDLERSHARED_EXPORT RequestHandler
+class RequestHandler
 {
 
 private:
 
     Model compuCellModel;
+
+    QDomDocument testDocument;
 
 public:
 
@@ -23,6 +25,8 @@ public:
      * @return True if Open simulation is successful else False
      */
     bool openCompuCellModel(QString cc3dFilePath);
+
+    QDomDocument getModelXML();
 
     ~RequestHandler();
 
