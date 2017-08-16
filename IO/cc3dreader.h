@@ -1,13 +1,17 @@
 #ifndef CC3DREADER_H
 #define CC3DREADER_H
 
-#include "io_global.h"
 #include <modelresoucedata.h>
 #include <QDomDocument>
 #include <QFileInfo>
 #include <QDir>
 
-class IOSHARED_EXPORT CC3DReader
+/**
+ * This class responsible for reading CompuCell3D project file.
+ * Which is a XML file with .cc3d extension.
+ *
+ */
+class CC3DReader
 {
 
 public:
