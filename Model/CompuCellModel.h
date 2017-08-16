@@ -1,10 +1,9 @@
 #ifndef COMPUCELLMODEL_H
 #define COMPUCELLMODEL_H
 
-#include "model_global.h"
 #include <modelresoucedata.h>
 
-class MODELSHARED_EXPORT Model
+class Model
 {
 
 private:

@@ -8,6 +8,8 @@ QT       -= gui
 
 TARGET = Model
 TEMPLATE = lib
+CONFIG += staticlib
+
 
 DEFINES += MODEL_LIBRARY
 
@@ -29,7 +31,6 @@ SOURCES += \
 
 HEADERS += \
         CompuCellModel.h \
-        model_global.h \ 
     modelresoucedata.h \
     resourcetype.h
 
