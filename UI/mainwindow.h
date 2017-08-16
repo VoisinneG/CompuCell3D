@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <requesthandler.h>
+#include <QStandardItemModel>
 
 namespace Ui {
 class MainWindow;
@@ -16,6 +17,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void preOrder(QDomNode dom, QStandardItemModel *model);
 private slots:
     void on_actionOpenSimulation_triggered();
 

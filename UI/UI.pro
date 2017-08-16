@@ -33,6 +33,7 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
+#------------------------ Model Library ------------------------
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Model/release/ -lModel
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Model/debug/ -lModel
 else:unix: LIBS += -L$$OUT_PWD/../Model/ -lModel
@@ -40,7 +41,14 @@ else:unix: LIBS += -L$$OUT_PWD/../Model/ -lModel
 INCLUDEPATH += $$PWD/../Model
 DEPENDPATH += $$PWD/../Model
 
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Model/release/libModel.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Model/debug/libModel.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Model/release/Model.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Model/debug/Model.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Model/libModel.a
+#------------------------------------------------------------
 
+#-------- IO Library -------------------------
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../IO/release/ -lIO
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../IO/debug/ -lIO
 else:unix: LIBS += -L$$OUT_PWD/../IO/ -lIO
@@ -48,10 +56,24 @@ else:unix: LIBS += -L$$OUT_PWD/../IO/ -lIO
 INCLUDEPATH += $$PWD/../IO
 DEPENDPATH += $$PWD/../IO
 
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../IO/release/libIO.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../IO/debug/libIO.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../IO/release/IO.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../IO/debug/IO.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../IO/libIO.a
+#------------------------------------------------
 
+#------------------------ RequestHandler Library ------------------------------------
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../RequestHandler/release/ -lRequestHandler
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../RequestHandler/debug/ -lRequestHandler
 else:unix: LIBS += -L$$OUT_PWD/../RequestHandler/ -lRequestHandler
 
 INCLUDEPATH += $$PWD/../RequestHandler
 DEPENDPATH += $$PWD/../RequestHandler
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/release/libRequestHandler.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/debug/libRequestHandler.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/release/RequestHandler.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/debug/RequestHandler.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/libRequestHandler.a
+#------------------------------------------------------------------------------------

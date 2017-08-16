@@ -37,10 +37,12 @@ void MainWindow::on_actionOpenSimulation_triggered()
             if(isOpenSuccess)
             {
                 // Get the model XML tree
-                //requestHandler.getModelXMLObject();
+                QDomDocument modelDomDocument = requestHandler.getModelXML();
 
                 // Populate the model editor tree view
-                //this->ui->tree
+                QStandardItemModel *model = new QStandardItemModel();
+                preOrder(modelDomDocument.firstChild(), model);
+                this->ui->treeViewModelEditor->setModel(model);
 
             }
         }
@@ -48,6 +50,28 @@ void MainWindow::on_actionOpenSimulation_triggered()
         {
             // Error file does not exists but sent to open
             qCritical() << "File does not exists. Invalid File Path:" << filePath;
+        }
+    }
+}
+
+void MainWindow::preOrder(QDomNode dom, QStandardItemModel *model){
+    while (!dom.isNull()) {
+        QStandardItem* itemProperty = new QStandardItem(dom.nodeName());
+        QStandardItem* itemValue = new QStandardItem(dom.nodeValue());
+        QList<QStandardItem*> itemList;
+        itemList.append(itemProperty);
+        itemList.append(itemValue);
+
+        model->appendRow(itemList);
+
+        if(dom.hasChildNodes())
+        {
+            QDomNodeList childList = dom.childNodes();
+            for(int i =0; i <childList.count(); i++)
+            {
+                QDomNode childNode = childList.at(i);
+                preOrder(childNode, model);
+            }
         }
     }
 }
