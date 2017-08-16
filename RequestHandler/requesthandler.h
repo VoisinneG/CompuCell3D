@@ -1,8 +1,8 @@
 #ifndef REQUESTHANDLER_H
 #define REQUESTHANDLER_H
 
-#include "requesthandler_global.h"
 #include <CompuCellModel.h>
+#include <modelreader.h>
 #include <QFileInfo>
 #include <cc3dreader.h>
 

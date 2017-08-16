@@ -1,5 +1,4 @@
 #include "requesthandler.h"
-#include <modelreader.h>
 
 RequestHandler::RequestHandler()
 {
@@ -27,7 +26,7 @@ bool RequestHandler::openCompuCellModel(QString cc3dFilePath)
 //    QDomDocument domDocument = modelReader.readModelXMLFile(modelResourceData.getModelXMLFilePath());
 //    this->testDocument = domDocument;
 
-//    return isOpenModelSucess;
+    return isOpenModelSucess;
 }
 
 QDomDocument RequestHandler::getModelXML()
