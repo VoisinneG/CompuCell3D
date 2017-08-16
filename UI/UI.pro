@@ -33,20 +33,20 @@ HEADERS += \
 FORMS += \
         mainwindow.ui
 
-#------------------------ Model Library ------------------------
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Model/release/ -lModel
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Model/debug/ -lModel
-else:unix: LIBS += -L$$OUT_PWD/../Model/ -lModel
+#------------------------ RequestHandler Library ------------------------------------
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../RequestHandler/release/ -lRequestHandler
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../RequestHandler/debug/ -lRequestHandler
+else:unix: LIBS += -L$$OUT_PWD/../RequestHandler/ -lRequestHandler
 
-INCLUDEPATH += $$PWD/../Model
-DEPENDPATH += $$PWD/../Model
+INCLUDEPATH += $$PWD/../RequestHandler
+DEPENDPATH += $$PWD/../RequestHandler
 
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Model/release/libModel.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Model/debug/libModel.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Model/release/Model.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Model/debug/Model.lib
-else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Model/libModel.a
-#------------------------------------------------------------
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/release/libRequestHandler.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/debug/libRequestHandler.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/release/RequestHandler.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/debug/RequestHandler.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/libRequestHandler.a
+#------------------------------------------------------------------------------------
 
 #-------- IO Library -------------------------
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../IO/release/ -lIO
@@ -63,17 +63,17 @@ else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../IO/libIO.a
 #------------------------------------------------
 
-#------------------------ RequestHandler Library ------------------------------------
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../RequestHandler/release/ -lRequestHandler
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../RequestHandler/debug/ -lRequestHandler
-else:unix: LIBS += -L$$OUT_PWD/../RequestHandler/ -lRequestHandler
+#------------------------ Model Library ------------------------
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../Model/release/ -lModel
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../Model/debug/ -lModel
+else:unix: LIBS += -L$$OUT_PWD/../Model/ -lModel
 
-INCLUDEPATH += $$PWD/../RequestHandler
-DEPENDPATH += $$PWD/../RequestHandler
+INCLUDEPATH += $$PWD/../Model
+DEPENDPATH += $$PWD/../Model
 
-win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/release/libRequestHandler.a
-else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/debug/libRequestHandler.a
-else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/release/RequestHandler.lib
-else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/debug/RequestHandler.lib
-else:unix: PRE_TARGETDEPS += $$OUT_PWD/../RequestHandler/libRequestHandler.a
-#------------------------------------------------------------------------------------
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Model/release/libModel.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Model/debug/libModel.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Model/release/Model.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../Model/debug/Model.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../Model/libModel.a
+#------------------------------------------------------------
