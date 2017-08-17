@@ -18,4 +18,6 @@ QDomDocument ModelReader::readModelXMLFile(QString filePath)
     }
 
     domDocument.setContent(&cc3dFile, false);
+
+    return domDocument;
 }
