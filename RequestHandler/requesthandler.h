@@ -12,9 +12,6 @@ class RequestHandler
 private:
 
     Model compuCellModel;
-
-    QDomDocument testDocument;
-
 public:
 
     RequestHandler();
