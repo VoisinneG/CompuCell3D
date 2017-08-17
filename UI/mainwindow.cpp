@@ -36,13 +36,11 @@ void MainWindow::on_actionOpenSimulation_triggered()
             bool isOpenSuccess = requestHandler.openCompuCellModel(filePath);
             if(isOpenSuccess)
             {
-                // Get the model XML tree
-                QDomDocument modelDomDocument = requestHandler.getModelXML();
+                qDebug() << "File Open Successful.";
 
                 // Populate the model editor tree view
-                QStandardItemModel *model = new QStandardItemModel();
-                preOrder(modelDomDocument.firstChild(), model);
-                this->ui->treeViewModelEditor->setModel(model);
+                this->setupModelEditor();
+
 
             }
         }
@@ -54,7 +52,28 @@ void MainWindow::on_actionOpenSimulation_triggered()
     }
 }
 
-void MainWindow::preOrder(QDomNode dom, QStandardItemModel *model){
+void MainWindow::setupModelEditor()
+{
+    // Get the model XML tree
+    QDomDocument modelDomDocument = requestHandler.getModelXML();
+
+    // Intialize the model with column count and headers
+    QStandardItemModel *model = new QStandardItemModel();
+
+    QStringList modelEditorHeaderLabels;
+    modelEditorHeaderLabels.append("Property");
+    modelEditorHeaderLabels.append("Value");
+
+    model->setColumnCount(2);
+    model->setHorizontalHeaderLabels(modelEditorHeaderLabels);
+
+    preOrder(modelDomDocument.firstChild(), model);
+
+    this->ui->treeViewModelEditor->setModel(model);
+}
+
+void MainWindow::preOrder(QDomNode dom, QStandardItemModel *model, QStandardItem *item){
+
     while (!dom.isNull()) {
         QStandardItem* itemProperty = new QStandardItem(dom.nodeName());
         QStandardItem* itemValue = new QStandardItem(dom.nodeValue());
@@ -62,17 +81,27 @@ void MainWindow::preOrder(QDomNode dom, QStandardItemModel *model){
         itemList.append(itemProperty);
         itemList.append(itemValue);
 
-        model->appendRow(itemList);
+        if(item == NULL)
+        {
+            model->appendRow(itemList);
+        }
+        else
+        {
+            item->appendRow(itemList);
+        }
 
         if(dom.hasChildNodes())
         {
             QDomNodeList childList = dom.childNodes();
             for(int i =0; i <childList.count(); i++)
             {
+
                 QDomNode childNode = childList.at(i);
-                preOrder(childNode, model);
+                preOrder(childNode, model, itemProperty);
             }
         }
+
+        dom = dom.nextSibling();
     }
 }
 
