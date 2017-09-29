@@ -1,32 +1,46 @@
-#ifndef REQUESTHANDLER_H
-#define REQUESTHANDLER_H
+//
+// Created by Anwar on 8/30/17.
+//
 
-#include <CompuCellModel.h>
-#include <modelreader.h>
-#include <QFileInfo>
-#include <cc3dreader.h>
+#ifndef COMPUCELL3D_REQUESTHANDLER_H
+#define COMPUCELL3D_REQUESTHANDLER_H
 
-class RequestHandler
-{
+
+#include "Model/CompuCellModel.h"
+
+/**
+ * This class is responsible for taking in requests from UI or CLI for processing with CompuCell3D.
+ */
+class RequestHandler {
+
 
 private:
-
+    // Model class object which holds all the data for CompuCell3D Model
     Model compuCellModel;
+
+    bool isModelLoaded;
+
 public:
 
-    RequestHandler();
-
-    /**
-     * This function reads the input file specified and open the CompuCell3D model.
-     * @param filePath Path of CompuCell3D project file (.cc3d)
-     * @return True if Open simulation is successful else False
-     */
     bool openCompuCellModel(QString cc3dFilePath);
 
-    QDomDocument getModelXML();
+    bool loadModelXML();
+
+    void startSimulation();
+
+    void stepSimulation();
+
+    void pauseSimulation();
+
+    void stopSimulation();
+
+    void resumeSimulation();
+
+    void getModelXML();
 
     ~RequestHandler();
 
 };
 
-#endif // REQUESTHANDLER_H
+
+#endif //COMPUCELL3D_REQUESTHANDLER_H

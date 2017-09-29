@@ -1,49 +1,50 @@
-#include "requesthandler.h"
-#include <qdebug.h>
-RequestHandler::RequestHandler()
-{
-    this->compuCellModel = Model();
-}
+//
+// Created by Anwar on 8/30/17.
+//
 
-bool RequestHandler::openCompuCellModel(QString cc3dFilePath)
-{
-    bool isOpenModelSucess = false;
+#include "requesthandler.h"
+#include "IO/cc3dreader.h"
+#include "IO/modelreader.h"
+#include <qdebug.h>
+#include <QFileInfo>
+#include "XMLUtils/XMLParserExpat.h"
+
+bool RequestHandler::openCompuCellModel(QString cc3dFilePath) {
+
+    bool isOpenModelSuccess = false;
 
     QString COMPUCELL_3D_FILE_EXTENSION = ".cc3d";
 
     Q_ASSERT_X(cc3dFilePath != NULL, "Opening Simulation", "Null file path");
     Q_ASSERT_X(QFileInfo(cc3dFilePath).exists(), "Opening Simulation", "File does not exists");
-    Q_ASSERT_X(cc3dFilePath.endsWith(COMPUCELL_3D_FILE_EXTENSION), "Opening Simulation", "Invalid File Extension");
+    Q_ASSERT_X(cc3dFilePath.endsWith(COMPUCELL_3D_FILE_EXTENSION, Qt::CaseInsensitive), "Opening Simulation", "Invalid File Extension");
 
     try
     {
         // Read the CompuCell3D project file (.cc3d)
         CC3DReader cc3dReader;
         ModelResouceData modelResourceData = cc3dReader.readCC3DFile(cc3dFilePath);
+
+        // Set Model ResourceData which contains the information from .cc3d file
         this->compuCellModel.setModelResourceData(modelResourceData);
         qDebug() << "Reading file successful- " << cc3dFilePath;
     }
     catch(...)
     {
-        isOpenModelSucess = false;
+        isOpenModelSuccess = false;
         qDebug() << "Unable to open File-" << cc3dFilePath;
     }
 
-    isOpenModelSucess = true;
-    return isOpenModelSucess;
+    isOpenModelSuccess = true;
+    return isOpenModelSuccess;
 }
 
-QDomDocument RequestHandler::getModelXML()
+void RequestHandler::getModelXML()
 {
-    // Read the Model XML file and populate the Model Explorer and Editor
-    ModelReader modelReader;
-    ModelResouceData modelResourceData = this->compuCellModel.getModelResourceData();
-    QDomDocument domDocument = modelReader.readModelXMLFile(modelResourceData.getModelXMLFilePath());
-    qDebug() << "Reading XML file successful- " << modelResourceData.getModelXMLFilePath();
 
-    qDebug() << domDocument.firstChildElement().nodeName();
+    // Load model into simulation
 
-    return domDocument;
+    //return &parser;
 }
 
 RequestHandler::~RequestHandler()
@@ -51,4 +52,28 @@ RequestHandler::~RequestHandler()
     //delete this->compuCellModel;
 }
 
+bool RequestHandler::loadModelXML() {
+    bool isModelLoadingSuceesful = false;
+    try
+    {
+        // Read the XML file for the model
+        ModelResouceData modelResouceData = this->compuCellModel.getModelResourceData();
+        QString xMLFilePath = modelResouceData.getModelXMLFilePath();
 
+        ModelReader modelReader;
+        modelReader.readModelXMLFile(xMLFilePath);
+
+        isModelLoadingSuceesful = true;
+
+        qDebug() << QString(parser.rootElement->name.c_str());
+
+    }
+    catch(...)
+    {
+        isModelLoadingSuceesful = false;
+    }
+
+    isModelLoaded = isModelLoadingSuceesful;
+
+    return isModelLoadingSuceesful;
+}
