@@ -1,7 +1,7 @@
 #ifndef COMPUCELLMODEL_H
 #define COMPUCELLMODEL_H
 
-#include <modelresoucedata.h>
+#include "modelresoucedata.h"
 
 class Model
 {
@@ -9,6 +9,9 @@ class Model
 private:
 
     ModelResouceData modelResourceData;
+
+    Simulator* simulator;
+
 
 public:
     Model();

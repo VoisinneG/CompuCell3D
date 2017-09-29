@@ -1,9 +1,9 @@
 #ifndef MODELRESOUCEDATA_H
 #define MODELRESOUCEDATA_H
 
-#include<QString>
+//#include<QString>
 #include<QMap>
-#include<resourcetype.h>
+#include "resourcetype.h"
 #include <QVersionNumber>
 #include <QFile>
 

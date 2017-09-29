@@ -2,7 +2,7 @@
 #define RESOURCETYPE_H
 
 
-enum class ResourceType
+enum ResourceType
 {
     PYTHON,
     XML,
