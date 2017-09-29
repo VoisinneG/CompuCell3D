@@ -1,8 +1,7 @@
 #ifndef CC3DREADER_H
 #define CC3DREADER_H
 
-#include <modelresoucedata.h>
-#include <QDomDocument>
+#include "Model/modelresoucedata.h"
 #include <QFileInfo>
 #include <QDir>
 

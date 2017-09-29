@@ -1,6 +1,7 @@
 #include "cc3dreader.h"
 #include <QXmlReader>
 #include <qdebug.h>
+#include <QDomElement>
 
 CC3DReader::CC3DReader()
 {
@@ -85,7 +86,6 @@ ModelResouceData CC3DReader::readCC3DFile(QString filePath)
 
 
     QString modelSettingFilePath = "";
-
 
     return modelResourceData;
 }
