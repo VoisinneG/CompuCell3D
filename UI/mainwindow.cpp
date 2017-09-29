@@ -16,36 +16,27 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-/**
- * This slot is triggered when Open Simulation is clicked under File Menu.
- *
- */
 void MainWindow::on_actionOpenSimulation_triggered()
 {
+    // Open FileDialog and get the file path to open
     QString filePath = QFileDialog::getOpenFileName(this, tr("Open Simulation"), ".", tr("CompuCell3D File (*.cc3d)"));
 
     qDebug() << "File path to Open: " << filePath;
 
     // filePath will be null if user has not selected any file and clicked cancel on the dialog
-    if(filePath != NULL)
-    {
+    if(filePath != NULL) {
+
         // Check if selected file exists
-        if(QFileInfo(filePath).exists())
-        {
+        if (QFileInfo(filePath).exists()) {
             bool isOpenSuccess = requestHandler.openCompuCellModel(filePath);
-            if(isOpenSuccess)
-            {
+
+            if (isOpenSuccess) {
                 qDebug() << "File Open Successful.";
 
                 // Populate the model editor tree view
                 this->setupModelEditor();
-
-
             }
-        }
-        else
-        {
+        } else {
             // Error file does not exists but sent to open
             qCritical() << "File does not exists. Invalid File Path:" << filePath;
         }
@@ -54,29 +45,31 @@ void MainWindow::on_actionOpenSimulation_triggered()
 
 void MainWindow::setupModelEditor()
 {
+
     // Get the model XML tree
-    QDomDocument modelDomDocument = requestHandler.getModelXML();
+    requestHandler.getModelXML();
 
-    // Intialize the model with column count and headers
-    QStandardItemModel *model = new QStandardItemModel();
-
-    QStringList modelEditorHeaderLabels;
-    modelEditorHeaderLabels.append("Property");
-    modelEditorHeaderLabels.append("Value");
-
-    model->setColumnCount(2);
-    model->setHorizontalHeaderLabels(modelEditorHeaderLabels);
-
-    preOrder(modelDomDocument.firstChild(), model);
-
-    this->ui->treeViewModelEditor->setModel(model);
+//    // Intialize the model with column count and headers
+//    QStandardItemModel *model = new QStandardItemModel();
+//
+//    QStringList modelEditorHeaderLabels;
+//    modelEditorHeaderLabels.append("Property");
+//    modelEditorHeaderLabels.append("Value");
+//
+//    model->setColumnCount(2);
+//    model->setHorizontalHeaderLabels(modelEditorHeaderLabels);
+//
+//    preOrder(modelDomDocument.firstChild(), model);
+//
+//    this->ui->treeViewModelEditor->setModel(model);
 }
 
-void MainWindow::preOrder(QDomNode dom, QStandardItemModel *model, QStandardItem *item){
-
+//void MainWindow::preOrder(QDomNode dom, QStandardItemModel *model, QStandardItem *item){
+/**
     while (!dom.isNull()) {
         QStandardItem* itemProperty = new QStandardItem(dom.nodeName());
         QStandardItem* itemValue = new QStandardItem(dom.nodeValue());
+        itemProperty->
         QList<QStandardItem*> itemList;
         itemList.append(itemProperty);
         itemList.append(itemValue);
@@ -103,6 +96,7 @@ void MainWindow::preOrder(QDomNode dom, QStandardItemModel *model, QStandardItem
 
         dom = dom.nextSibling();
     }
-}
+    **/
+//}
 
 
